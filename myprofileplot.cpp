@@ -249,7 +249,7 @@ void MyProfilePlot::setYData (int graphnum, float *y, int npts){
 
     //yAxis->rescale (true) ;
     rescaleAxes() ;
-    //this->replot() ;
+    this->replot() ;
 
 }
 
@@ -362,7 +362,7 @@ void MyProfilePlot::setupScatterPlot (double *x, double *y, double *coefs, int n
     eqn.sprintf ("Wavenumber = %5.2f + %5.2f * Bandnumber", coefs[0], coefs[1]) ;
     eqn_label->setText (eqn) ;
     eqn_label->setPen (QPen(Qt::black)) ;
-    addItem (eqn_label) ;
+   // addItem (eqn_label) ;
     minx = 1.E9 ;
     maxx = -1.E9 ;
     maxy = -1.E9 ;
@@ -413,7 +413,7 @@ void MyProfilePlot::setupScatterPlot (float *x, float *y, double *coefs, int npt
     eqn.sprintf ("Wavenumber = %5.2f + %5.2f * Bandnumber", coefs[0], coefs[1]) ;
     eqn_label->setText (eqn) ;
     eqn_label->setPen (QPen(Qt::black)) ;
-    addItem (eqn_label) ;
+    //addItem (eqn_label) ;
     minx = 1.E9 ;
     maxx = -1.E9 ;
     for (i=0; i<npts; i++){

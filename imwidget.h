@@ -22,7 +22,7 @@ public:
 
     unsigned short uMax, uMin ;
 signals:
-
+    void clickedXY(int *xy);
 public slots:
 };
 

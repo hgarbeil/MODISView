@@ -10,11 +10,16 @@ MOD11_hdf::MOD11_hdf()
     // dataset 0 is daytime LST
     startl = 700 ;
     starts = 1080 ;
+    pixspace = 180. / 3600. ;
+    startlat = 90.f - (startl * pixspace) ;
+    startlon = starts * pixspace ;
     ns = 1320 ;
     nl = 700 ;
     nightdata = new uint16 [ns * nl];
     daydata = new uint16 [ns * nl];
     stackf = 0L ;
+    daystackf = 0L ;
+    //stack = 0L ;
 
 }
 
@@ -27,6 +32,8 @@ MOD11_hdf::~MOD11_hdf (){
 
     if (stackf)
         delete [] stackf ;
+    if (daystackf)
+        delete [] daystackf ;
 }
 
 void MOD11_hdf::openHDF (char *infile){
@@ -86,9 +93,10 @@ void MOD11_hdf::openHDF (char *infile){
 }
 
 
-void MOD11_hdf::getStack (char *infile) {
+int MOD11_hdf::getStack (char *infile) {
     // The stack file is our flat file containing a band for each of the 20+ years, stacked as unsigned short arrays ns * nl * nyears
     // No scaling was applied therefore to get degrees K needs to be multiplied by .02
+    uint16 *stack ;
     long nbytes ;
     int nyears ;
 
@@ -96,6 +104,10 @@ void MOD11_hdf::getStack (char *infile) {
     if (stackf) {
         delete [] stackf ;
     }
+    if (daystackf){
+        delete [] daystackf ;
+    }
+
     string directory, stackfile;
 
     string filename (infile) ;
@@ -110,14 +122,30 @@ void MOD11_hdf::getStack (char *infile) {
     qf.open (QIODevice::ReadOnly) ;
     nbytes = qf.size() ;
     // allocate memory for the stack
-    unsigned short *stack = new unsigned short [nbytes/2] ;
+    stack = new uint16 [nbytes/2] ;
     stackf = new float [nbytes/2] ;
     nyears = int(nbytes / (ns * nl * 2)) ;
     qDebug () << "number of years "<< nyears ;
     qf.read ((char *)stack, nbytes) ;
     qf.close() ;
-    for (int i=0; i<ns * nl * nyears; i++){
+    for (long i=0; i<nbytes/2; i++){
         stackf[i] = stack[i] * 0.02f ;
     }
+    stackfile = directory + string("/outarr_day") ;
+    QFile qf1 (stackfile.c_str()) ;
+    qf1.open (QIODevice::ReadOnly) ;
+    nbytes = qf1.size() ;
+    // allocate memory for the stack
+    daystackf = new float [nbytes/2] ;
+    nyears = int(nbytes / (ns * nl * 2)) ;
+    qDebug () << "number of years "<< nyears ;
+    qf1.read ((char *)stack, nbytes) ;
+    qf1.close() ;
+    for (long i=0; i<nbytes/2; i++){
+        daystackf[i] = stack[i] * 0.02f ;
+    }
+
+    qDebug() << "this year is " << stackf[long(ns * nl * 20)+350 * ns + 660] ;
     delete [] stack ;
+    return (nyears) ;
 }

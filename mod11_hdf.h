@@ -10,9 +10,9 @@ public:
     MOD11_hdf();
     ~MOD11_hdf() ;
     void openHDF (char *infile);
-    void getStack (char *infile) ;
+    int getStack (char *infile) ;
     uint16 *nightdata, *daydata ;
-    float *stackf ;
+    float *stackf, *daystackf, startlat, startlon, pixspace ;
     int starts, startl, ns, nl ;
 private :
     int32 sds_id ;

@@ -6,7 +6,7 @@
 
 QT       += core gui
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
 
 TARGET = QHdfView
 TEMPLATE = app
@@ -28,15 +28,22 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     mod11_hdf.cpp \
-    imwidget.cpp
+    imwidget.cpp \
+    qcustomplot.cpp \
+    myprofileplot.cpp \
+    plotscaledialog.cpp
 
 HEADERS += \
         mainwindow.h \
     mod11_hdf.h \
-    imwidget.h
+    imwidget.h \
+    qcustomplot.h \
+    myprofileplot.h \
+    plotscaledialog.h
 
 FORMS += \
-        mainwindow.ui
+        mainwindow.ui \
+    plotscaledialog.ui
 
 INCLUDEPATH += /usr/local/include
 

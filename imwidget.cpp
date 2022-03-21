@@ -138,9 +138,11 @@ void Imwidget::paintEvent(QPaintEvent *event) {
 
 void Imwidget::mousePressEvent (QMouseEvent *ev){
 
-
+    int xy[2];
     QToolTip::showText (ev->globalPos(),
     QString::number(ev->pos().x())+","+QString::number(ev->pos().y())) ;
-
+    xy[0] = ev->pos().x() ;
+    xy[1] = ev->pos().y() ;
+    this->clickedXY(xy);
     //repaint() ;
 }
