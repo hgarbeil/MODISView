@@ -19,3 +19,4 @@ This is a source code only repository. To properly use this program for a specif
     
  
 ### Data
+The program is designed to read in global NDVI (MOD13 and MOD11) datasets. These files are available via the NASA data portals for MODIS land data products.
