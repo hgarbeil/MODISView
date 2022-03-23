@@ -8,6 +8,7 @@ This program will allow a user to read in a MOD11 land surface temperature hdf g
 
 ## Requirements
 
+### Source Code and Build
 This is a source code only repository. To properly use this program for a specific platform (MacOS, Windows or Linux) a Qt Programming environment and HDF 4 development libraries are required. Additional add-ons such as QtCustomPlot have been added to the repository. This software has been developed on a Macbook Pro running El Capitan. Qt and HDF versions installed on this machine are the following.
 
   * Qt 5.11.3 clang 64 bit
@@ -17,3 +18,4 @@ This is a source code only repository. To properly use this program for a specif
     * https://support.hdfgroup.org/release4/obtain.html
     
  
+### Data
