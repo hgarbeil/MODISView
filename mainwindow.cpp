@@ -13,6 +13,7 @@ MainWindow::MainWindow(QWidget *parent) :
     nyears = 20 ;
     xloc = ns / 2 ;
     yloc = nl / 2 ;
+    LSTFlag = true ;
 
     connect (ui->image_widget, SIGNAL(clickedXY(int *)), this, SLOT(newXY (int *))) ;
 }

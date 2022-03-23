@@ -31,7 +31,8 @@ SOURCES += \
     imwidget.cpp \
     qcustomplot.cpp \
     myprofileplot.cpp \
-    plotscaledialog.cpp
+    plotscaledialog.cpp \
+    mod13_hdf.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -39,7 +40,8 @@ HEADERS += \
     imwidget.h \
     qcustomplot.h \
     myprofileplot.h \
-    plotscaledialog.h
+    plotscaledialog.h \
+    mod13_hdf.h
 
 FORMS += \
         mainwindow.ui \
@@ -54,4 +56,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 RESOURCES += \
+    resources.qrc \
     resources.qrc

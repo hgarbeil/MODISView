@@ -22,6 +22,7 @@ public:
     MOD11_hdf *mhdf ;
     ~MainWindow();
     int ns, nl, xloc, yloc, nyears ;
+    bool LSTFlag ;
 
 private slots:
     void on_actionOpen_triggered();

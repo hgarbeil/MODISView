@@ -15,7 +15,7 @@ MOD13_hdf::MOD13_hdf()
     startlon = starts * pixspace ;
     ns = 1320 ;
     nl = 700 ;
-    nvidata = new uint16 [ns * nl];
+    ndvidata = new uint16 [ns * nl];
     stackf = 0L ;
     daystackf = 0L ;
     //stack = 0L ;
@@ -24,10 +24,8 @@ MOD13_hdf::MOD13_hdf()
 
 
 MOD13_hdf::~MOD13_hdf (){
-    if (nightdata)
-        delete [] nightdata ;
-    if (daydata)
-        delete [] daydata ;
+    if (ndvidata)
+        delete [] ndvidata ;
 
     if (stackf)
         delete [] stackf ;
@@ -70,13 +68,10 @@ void MOD13_hdf::openHDF (char *infile){
         qDebug() <<i << "  " << name ;
         if (i==0){
             qDebug()<< dim_sizes[0] << " " << dim_sizes[1] << " " << rank ;
-            SDreaddata(sds_id, start, stride, edge, daydata) ;
+            SDreaddata(sds_id, start, stride, edge, ndvidata) ;
         }
 
-        if (i==5){
-            qDebug()<< dim_sizes[0] << " " << dim_sizes[1] << " " << rank ;
-            SDreaddata(sds_id, start, stride, edge, nightdata) ;
-        }
+
 
         for (int j=0; j<attributes; j++){
             SDattrinfo (sds_id, j, name, &num_type, &count) ;
@@ -85,8 +80,7 @@ void MOD13_hdf::openHDF (char *infile){
         }
     }
 
-    qDebug() << "day val is " << daydata [(nl/2)*ns+(ns/2)] ;
-    qDebug() << "night val is " << nightdata [(nl/2)*ns+(ns/2)] ;
+    qDebug() << "ndvi val is " << ndvidata [(nl/2)*ns+(ns/2)] ;
 
     SDend (sd_id) ;
 }

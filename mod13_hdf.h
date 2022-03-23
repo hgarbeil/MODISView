@@ -11,7 +11,7 @@ public:
     ~MOD13_hdf() ;
     void openHDF (char *infile);
     int getStack (char *infile) ;
-    uint16 *nvidata ;
+    uint16 *ndvidata ;
     float *stackf, *daystackf, startlat, startlon, pixspace ;
     int starts, startl, ns, nl ;
 private :
