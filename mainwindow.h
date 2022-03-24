@@ -7,6 +7,7 @@
 #include <QObject>
 #include "mfhdf.h"
 #include "mod11_hdf.h"
+#include "mod13_hdf.h"
 
 namespace Ui {
 class MainWindow;
@@ -19,7 +20,8 @@ class MainWindow : public QMainWindow
 public:
 
     explicit MainWindow(QWidget *parent = nullptr);
-    MOD11_hdf *mhdf ;
+    MOD11_hdf *mod11_hdf ;
+    MOD13_hdf *mod13_hdf ;
     ~MainWindow();
     int ns, nl, xloc, yloc, nyears ;
     bool LSTFlag ;
@@ -31,6 +33,8 @@ private slots:
 
     void on_nightButton_toggled(bool checked);
     void newXY (int *xy) ;
+
+    void on_landtempRB_toggled(bool checked);
 
 private:
     Ui::MainWindow *ui;

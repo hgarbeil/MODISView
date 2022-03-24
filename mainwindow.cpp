@@ -7,7 +7,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    mhdf = new MOD11_hdf () ;
+    mod11_hdf = new MOD11_hdf () ;
+    mod13_hdf = new MOD13_hdf () ;
     nl = 700 ;
     ns = 1320 ;
     nyears = 20 ;
@@ -21,23 +22,25 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
     delete ui;
+    delete mod11_hdf ;
+    delete mod13_hdf ;
 }
 
 void MainWindow::on_actionOpen_triggered()
 {
-    this->infile = QFileDialog::getOpenFileName (this, "Open HDF4 File", "/Users/hg1/data") ;
+    this->infile = QFileDialog::getOpenFileName (this, "Open HDF4 File", "/Users/hg1/data/MOD11") ;
     QFile *qf = new QFile (this->infile) ;
     if (!qf->exists()){
         qDebug() << ("Uhoh") ;
         return ;
     }
 
-    mhdf->openHDF(this->infile.toLatin1().data()) ;
-
-    nyears = mhdf->getStack(this->infile.toLatin1().data()) ;
-    ui->image_widget->loadQImage (mhdf->nightdata, ns, nl) ;
-    //ui->image_widget->loadQImage (mhdf->stack, ns, nl) ;
-    ui->image_widget->loadQImage_alt (mhdf->daydata, ns, nl) ;
+    // if MOD11 is selected
+    mod11_hdf->openHDF(this->infile.toLatin1().data()) ;
+    nyears = mod11_hdf->getStack(this->infile.toLatin1().data()) ;
+    ui->image_widget->loadQImage (mod11_hdf->nightdata, ns, nl) ;
+    //ui->image_widget->loadQImage (mod11_hdf->stack, ns, nl) ;
+    ui->image_widget->loadQImage_alt (mod11_hdf->daydata, ns, nl) ;
     ui->image_widget->update() ;
     this->getProfile (ns/2, nl/2) ;
 }
@@ -59,12 +62,15 @@ void MainWindow::getProfile (int x, int y) {
     float *ydata = new float [nyears] ;
     float *ydata_day = new float [nyears];
     for (int i=0; i<nyears; i++){
-        ydata[i] = mhdf->stackf[i * npix +  ns * y + x] ;
-        ydata_day[i] = mhdf->daystackf[i * npix +  ns * y + x] ;
+        ydata[i] = mod11_hdf->stackf[i * npix +  ns * y + x] ;
+        ydata_day[i] = mod11_hdf->daystackf[i * npix +  ns * y + x] ;
         qDebug() << ydata[i] << "  " << ydata_day[i];
     }
     ui->plot_widget->setYData(0, ydata, nyears);
     ui->plot_widget->setYData(1, ydata_day, nyears);
+    delete [] ydata ;
+    delete [] ydata_day ;
+
 }
 
 void MainWindow::newXY (int *xy){
@@ -72,4 +78,10 @@ void MainWindow::newXY (int *xy){
     x = xy[0];
     y = xy[1];
     this->getProfile(x,y);
+}
+
+
+void MainWindow::on_landtempRB_toggled(bool checked)
+{
+    this->LSTFlag = checked ;
 }
