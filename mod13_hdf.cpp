@@ -17,7 +17,6 @@ MOD13_hdf::MOD13_hdf()
     nl = 700 ;
     ndvidata = new uint16 [ns * nl];
     stackf = 0L ;
-    daystackf = 0L ;
     //stack = 0L ;
 
 }
@@ -29,8 +28,7 @@ MOD13_hdf::~MOD13_hdf (){
 
     if (stackf)
         delete [] stackf ;
-    if (daystackf)
-        delete [] daystackf ;
+
 }
 
 void MOD13_hdf::openHDF (char *infile){
@@ -97,9 +95,6 @@ int MOD13_hdf::getStack (char *infile) {
     if (stackf) {
         delete [] stackf ;
     }
-    if (daystackf){
-        delete [] daystackf ;
-    }
 
     string directory, stackfile;
 
@@ -110,7 +105,7 @@ int MOD13_hdf::getStack (char *infile) {
         directory = filename.substr(0, last_slash_idx);
     }
     qDebug () <<"Filename directory is "<< directory.c_str() ;
-    stackfile = directory + string("/outarr") ;
+    stackfile = directory + string("/outarr_day") ;
     QFile qf (stackfile.c_str()) ;
     qf.open (QIODevice::ReadOnly) ;
     nbytes = qf.size() ;
@@ -122,21 +117,10 @@ int MOD13_hdf::getStack (char *infile) {
     qf.read ((char *)stack, nbytes) ;
     qf.close() ;
     for (long i=0; i<nbytes/2; i++){
-        stackf[i] = stack[i] * 0.02f ;
+        stackf[i] = stack[i] * 0.001f ;
     }
-    stackfile = directory + string("/outarr_day") ;
-    QFile qf1 (stackfile.c_str()) ;
-    qf1.open (QIODevice::ReadOnly) ;
-    nbytes = qf1.size() ;
-    // allocate memory for the stack
-    daystackf = new float [nbytes/2] ;
-    nyears = int(nbytes / (ns * nl * 2)) ;
-    qDebug () << "number of years "<< nyears ;
-    qf1.read ((char *)stack, nbytes) ;
-    qf1.close() ;
-    for (long i=0; i<nbytes/2; i++){
-        daystackf[i] = stack[i] * 0.02f ;
-    }
+
+
 
     qDebug() << "this year is " << stackf[long(ns * nl * 20)+350 * ns + 660] ;
     delete [] stack ;

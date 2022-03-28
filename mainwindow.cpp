@@ -15,6 +15,8 @@ MainWindow::MainWindow(QWidget *parent) :
     xloc = ns / 2 ;
     yloc = nl / 2 ;
     LSTFlag = true ;
+    m11dir = new QString ("/Users/hg1/data/MOD11") ;
+    m13dir = new QString ("/Users/hg1/data/MOD13") ;
 
     connect (ui->image_widget, SIGNAL(clickedXY(int *)), this, SLOT(newXY (int *))) ;
 }
@@ -28,7 +30,10 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_actionOpen_triggered()
 {
-    this->infile = QFileDialog::getOpenFileName (this, "Open HDF4 File", "/Users/hg1/data/MOD11") ;
+
+    if (LSTFlag){
+
+    this->infile = QFileDialog::getOpenFileName (this, "Open HDF4 File", *m11dir) ;
     QFile *qf = new QFile (this->infile) ;
     if (!qf->exists()){
         qDebug() << ("Uhoh") ;
@@ -41,6 +46,23 @@ void MainWindow::on_actionOpen_triggered()
     ui->image_widget->loadQImage (mod11_hdf->nightdata, ns, nl) ;
     //ui->image_widget->loadQImage (mod11_hdf->stack, ns, nl) ;
     ui->image_widget->loadQImage_alt (mod11_hdf->daydata, ns, nl) ;
+    } else {
+        this->infile = QFileDialog::getOpenFileName (this, "Open HDF4 File", *m13dir) ;
+        QFile *qf = new QFile (this->infile) ;
+        if (!qf->exists()){
+            qDebug() << ("Uhoh") ;
+            return ;
+        }
+
+        // if MOD11 is selected
+        mod13_hdf->openHDF(this->infile.toLatin1().data()) ;
+        nyears = mod13_hdf->getStack(this->infile.toLatin1().data()) ;
+        ui->image_widget->loadQImage (mod13_hdf->ndvidata, ns, nl) ;
+        //ui->image_widget->loadQImage (mod11_hdf->stack, ns, nl) ;
+        //ui->image_widget->loadQImage_alt (mod11_hdf->daydata, ns, nl) ;
+
+
+    }
     ui->image_widget->update() ;
     this->getProfile (ns/2, nl/2) ;
 }
@@ -61,13 +83,23 @@ void MainWindow::getProfile (int x, int y) {
     int npix = ns * nl ;
     float *ydata = new float [nyears] ;
     float *ydata_day = new float [nyears];
-    for (int i=0; i<nyears; i++){
-        ydata[i] = mod11_hdf->stackf[i * npix +  ns * y + x] ;
-        ydata_day[i] = mod11_hdf->daystackf[i * npix +  ns * y + x] ;
-        qDebug() << ydata[i] << "  " << ydata_day[i];
+    if (LSTFlag){
+        for (int i=0; i<nyears; i++){
+            ydata[i] = mod11_hdf->stackf[i * npix +  ns * y + x] ;
+            ydata_day[i] = mod11_hdf->daystackf[i * npix +  ns * y + x] ;
+            qDebug() << ydata[i] << "  " << ydata_day[i];
+        }
+    } else {
+        for (int i=0; i<nyears; i++){
+            ydata[i] = mod13_hdf->stackf[i * npix +  ns * y + x] ;
+            //ydata_day[i] = mod13_hdf->daystackf[i * npix +  ns * y + x] ;
+            qDebug() << ydata[i] << "  " << ydata_day[i];
+        }
+
     }
     ui->plot_widget->setYData(0, ydata, nyears);
-    ui->plot_widget->setYData(1, ydata_day, nyears);
+    if (LSTFlag)
+        ui->plot_widget->setYData(1, ydata_day, nyears);
     delete [] ydata ;
     delete [] ydata_day ;
 
@@ -84,4 +116,6 @@ void MainWindow::newXY (int *xy){
 void MainWindow::on_landtempRB_toggled(bool checked)
 {
     this->LSTFlag = checked ;
+
+
 }

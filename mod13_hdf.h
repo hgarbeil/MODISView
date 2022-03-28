@@ -12,7 +12,7 @@ public:
     void openHDF (char *infile);
     int getStack (char *infile) ;
     uint16 *ndvidata ;
-    float *stackf, *daystackf, startlat, startlon, pixspace ;
+    float *stackf, startlat, startlon, pixspace ;
     int starts, startl, ns, nl ;
 private :
     int32 sds_id ;

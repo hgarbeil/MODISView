@@ -20,6 +20,7 @@ class MainWindow : public QMainWindow
 public:
 
     explicit MainWindow(QWidget *parent = nullptr);
+    QString *m11dir, *m13dir ;
     MOD11_hdf *mod11_hdf ;
     MOD13_hdf *mod13_hdf ;
     ~MainWindow();
