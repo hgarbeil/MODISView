@@ -34,6 +34,7 @@ void Imwidget::loadQImage (unsigned short *dat, int ns, int nl) {
     max=-1.E9 ;
     npix = nl * ns ;
 
+
     if (userFlag) {
         max = uMax ;
         min = uMin ;
@@ -51,6 +52,9 @@ void Imwidget::loadQImage (unsigned short *dat, int ns, int nl) {
         //emit (setMnMx ((float*)&mnmx[0])) ;
 
     }
+    //max = 10000 ;
+    //min = 0 ;
+    qDebug () << "Min max is : "<< min << "   " << max ;
     scale = 255. / (max - min) ;
     for (i=0; i<nl; i++){
         line = (QRgb *) qim_0->scanLine(i) ;

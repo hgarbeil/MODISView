@@ -5,6 +5,7 @@
 #include <QToolTip>
 #include <QWidget>
 #include <QMouseEvent>
+#include <QDebug>
 
 class Imwidget : public QWidget
 {

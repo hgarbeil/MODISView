@@ -93,7 +93,7 @@ void MainWindow::getProfile (int x, int y) {
         for (int i=0; i<nyears; i++){
             ydata[i] = mod13_hdf->stackf[i * npix +  ns * y + x] ;
             //ydata_day[i] = mod13_hdf->daystackf[i * npix +  ns * y + x] ;
-            qDebug() << ydata[i] << "  " << ydata_day[i];
+            qDebug() << ydata[i] ;
         }
 
     }

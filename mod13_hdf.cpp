@@ -40,9 +40,10 @@ void MOD13_hdf::openHDF (char *infile){
 
 
     char name[240], attrb_name[240] ;
-    int32 n_datasets, n_fileattrs, sds_id, rank, dim_sizes[3],num_type, attributes,count ;
+    int32 n_datasets, n_fileattrs, sds_id, rank, icount, dim_sizes[3],num_type, attributes,count ;
     int32 start[2], stride[2], edge[2] ;
-    double scaleval;
+    int16 fillval, valrange[2] ;
+    double scaleval ;
     start[0] = startl ;
     start[1] = starts ;
     edge[0] = nl ;
@@ -67,11 +68,21 @@ void MOD13_hdf::openHDF (char *infile){
         qDebug() <<i << "  " << name ;
         if (i==0){
             qDebug ()<<"Number of attributes : " << attributes ;
-
+            for (int is = 0; is< attributes ; is++) {
+                 SDattrinfo (sds_id, is, name, &num_type, &icount) ;
+                 qDebug () << name << "  " << num_type << " " << icount ;
+            }
             int attnum = SDfindattr (sds_id, "scale_factor") ;
             SDreadattr (sds_id, attnum, &scaleval);
+            attnum = SDfindattr (sds_id, "_FillValue") ;
+            SDreadattr (sds_id, attnum, &fillval);
+            attnum = SDfindattr (sds_id, "valid_range") ;
+            SDreadattr (sds_id, attnum, &valrange[0]);
+            qDebug () << scaleval << " " << fillval << "  " << valrange[0]<< "  "<< valrange[1] ;
 
-            qDebug()<< dim_sizes[0] << " " << dim_sizes[1] << " " << rank ;
+
+
+            qDebug()<< dim_sizes[0] << " " << dim_sizes[1] << " " << rank  ;
             SDreaddata(sds_id, start, stride, edge, ndvidata) ;
         }
 
