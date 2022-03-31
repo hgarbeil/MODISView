@@ -42,6 +42,7 @@ void MOD13_hdf::openHDF (char *infile){
     char name[240], attrb_name[240] ;
     int32 n_datasets, n_fileattrs, sds_id, rank, dim_sizes[3],num_type, attributes,count ;
     int32 start[2], stride[2], edge[2] ;
+    double scaleval;
     start[0] = startl ;
     start[1] = starts ;
     edge[0] = nl ;
@@ -65,6 +66,11 @@ void MOD13_hdf::openHDF (char *infile){
         SDgetinfo (sds_id, name, &rank, dim_sizes, &num_type, &attributes ) ;
         qDebug() <<i << "  " << name ;
         if (i==0){
+            qDebug ()<<"Number of attributes : " << attributes ;
+
+            int attnum = SDfindattr (sds_id, "scale_factor") ;
+            SDreadattr (sds_id, attnum, &scaleval);
+
             qDebug()<< dim_sizes[0] << " " << dim_sizes[1] << " " << rank ;
             SDreaddata(sds_id, start, stride, edge, ndvidata) ;
         }
@@ -117,7 +123,7 @@ int MOD13_hdf::getStack (char *infile) {
     qf.read ((char *)stack, nbytes) ;
     qf.close() ;
     for (long i=0; i<nbytes/2; i++){
-        stackf[i] = stack[i] * 0.001f ;
+        stackf[i] = stack[i] / 10000. ;
     }
 
 
