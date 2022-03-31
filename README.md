@@ -4,7 +4,7 @@ MODIS MOD11 and MOD13 Global MODIS Monthly Global Analysis Software
 
 ## Description
 
-This program will allow a user to read in a MOD11 land surface temperature hdf global monthly file or a MOD13 NDVI hdf global monthly file. The program has been set to extract a region of interest of the continental United States.
+This program will allow a user to read in a MOD11 land surface temperature (LST) hdf global monthly file or a MOD13 normalized difference vegetation index (NDVI) hdf global monthly file. The program has been set to extract a region of interest of the continental United States. Both of these datasets are products from the NASA MODIS Land Science Teams. 
 
 ## Requirements
 
