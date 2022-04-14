@@ -117,7 +117,68 @@
       </widget>
      </item>
      <item>
-      <widget class="QComboBox" name="comboBox"/>
+      <widget class="QComboBox" name="month_CB">
+       <item>
+        <property name="text">
+         <string>Jan</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Feb</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Mar</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Apr</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>May</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Jun</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Jul</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Aug</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Sep</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Oct</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Nov</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Dec</string>
+        </property>
+       </item>
+      </widget>
      </item>
      <item>
       <widget class="QLabel" name="label_2">
@@ -127,7 +188,33 @@
       </widget>
      </item>
      <item>
-      <widget class="QComboBox" name="comboBox_2"/>
+      <widget class="QComboBox" name="year_CB">
+       <item>
+        <property name="text">
+         <string>2022</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>2021</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>2020</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>2019</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>2018</string>
+        </property>
+       </item>
+      </widget>
      </item>
     </layout>
    </widget>
@@ -172,6 +259,19 @@
       <string>NDVI</string>
      </property>
     </widget>
+   </widget>
+   <widget class="QLabel" name="fileLabel">
+    <property name="geometry">
+     <rect>
+      <x>260</x>
+      <y>26</y>
+      <width>341</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Current File : </string>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
