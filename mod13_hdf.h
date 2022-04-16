@@ -3,6 +3,8 @@
 #include "mfhdf.h"
 #include <QFile>
 #include <QDebug>
+#include <string>
+using namespace std;
 
 class MOD13_hdf
 {
@@ -11,9 +13,11 @@ public:
     ~MOD13_hdf() ;
     void openHDF (char *infile);
     int getStack (char *infile) ;
+    void getYearMonth(string) ;
     uint16 *ndvidata ;
     float *stackf, startlat, startlon, pixspace ;
     int starts, startl, ns, nl ;
+    int month, year ;
 private :
     int32 sds_id ;
 };

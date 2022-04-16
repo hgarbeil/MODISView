@@ -1,7 +1,5 @@
 #include "mod13_hdf.h"
-#include <string>
 
-using namespace std;
 
 MOD13_hdf::MOD13_hdf()
 {
@@ -138,8 +136,20 @@ int MOD13_hdf::getStack (char *infile) {
     }
 
 
-
+    this->getYearMonth(filename);
     qDebug() << "this year is " << stackf[long(ns * nl * 20)+350 * ns + 660] ;
     delete [] stack ;
     return (nyears) ;
+}
+
+
+void MOD13_hdf::getYearMonth (string fname){
+
+    size_t pos = fname.find ("A20") ;
+    string yearstring = fname.substr (pos+1, 4) ;
+    year = stoi (yearstring) ;
+    string daystring = fname.substr (pos+5, 3) ;
+
+    month = (stoi (daystring)+5) / 30 ;
+    qDebug() << "file date : " << year << "  " << month ;
 }

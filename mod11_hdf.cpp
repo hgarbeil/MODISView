@@ -1,7 +1,5 @@
 #include "mod11_hdf.h"
-#include <string>
 
-using namespace std;
 
 MOD11_hdf::MOD11_hdf()
 {
@@ -19,6 +17,9 @@ MOD11_hdf::MOD11_hdf()
     daydata = new uint16 [ns * nl];
     stackf = 0L ;
     daystackf = 0L ;
+    month = 0  ;
+    year = 2022 ;
+
     //stack = 0L ;
 
 }
@@ -145,7 +146,19 @@ int MOD11_hdf::getStack (char *infile) {
         daystackf[i] = stack[i] * 0.02f ;
     }
 
-    qDebug() << "this year is " << stackf[long(ns * nl * 20)+350 * ns + 660] ;
+    qDebug() << "this temp is " << stackf[long(ns * nl * 20)+350 * ns + 660] ;
     delete [] stack ;
     return (nyears) ;
+}
+
+
+void MOD11_hdf::getYearMonth (string fname){
+
+    size_t pos = fname.find ("A20") ;
+    string yearstring = fname.substr (pos+1, 4) ;
+    year = stoi (yearstring) ;
+    string daystring = fname.substr (pos+5, 3) ;
+
+    month = (stoi (daystring)+5) / 30 ;
+    qDebug() << "file date : " << year << "  " << month ;
 }
