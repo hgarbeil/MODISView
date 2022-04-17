@@ -17,7 +17,7 @@ MainWindow::MainWindow(QWidget *parent) :
     LSTFlag = true ;
     m11dir = new QString ("/Users/hg1/data/MOD11") ;
     m13dir = new QString ("/Users/hg1/data/MOD13") ;
-
+    ui->image_widget->setXY (xloc, yloc) ;
     connect (ui->image_widget, SIGNAL(clickedXY(int *)), this, SLOT(newXY (int *))) ;
 }
 

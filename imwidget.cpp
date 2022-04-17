@@ -10,6 +10,8 @@ Imwidget::Imwidget(QWidget *parent) : QWidget(parent)
     uMin = 0 ;
     imageLoaded = false ;
     nightFlag = true ;
+    xloc = 0 ;
+    yloc = 0 ;
 }
 
 
@@ -20,6 +22,11 @@ Imwidget::~Imwidget(){
         delete qim_1 ;
 }
 
+void Imwidget::setXY (int x, int y){
+    xloc = x ;
+    yloc = y ;
+    update() ;
+}
 
 void Imwidget::loadQImage (unsigned short *dat, int ns, int nl) {
     int   i, npix ;
@@ -137,6 +144,11 @@ void Imwidget::paintEvent(QPaintEvent *event) {
     QPainter p (this) ;
     p.drawImage (QRect(0,0,1320,700), *qim) ;
 
+    if (xloc > 0 && yloc > 0){
+        p.setPen (Qt::yellow) ;
+        p.drawRect (xloc-2, yloc-2, 5, 5) ;
+    }
+
 
 }
 
@@ -147,6 +159,9 @@ void Imwidget::mousePressEvent (QMouseEvent *ev){
     QString::number(ev->pos().x())+","+QString::number(ev->pos().y())) ;
     xy[0] = ev->pos().x() ;
     xy[1] = ev->pos().y() ;
+    xloc = xy[0] ;
+    yloc = xy[1] ;
+    setXY (xloc, yloc);
     this->clickedXY(xy);
     //repaint() ;
 }

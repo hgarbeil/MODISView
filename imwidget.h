@@ -17,9 +17,11 @@ public:
     void mousePressEvent (QMouseEvent *event) ;
     void loadQImage (unsigned short *data, int ns, int nl) ;
     void loadQImage_alt (unsigned short *data, int ns, int nl) ;
+    void setXY (int x, int y) ;
     void setNightFlag (bool nflag) ;
     QImage *qim, *qim_0, *qim_1 ;
     bool userFlag, imageLoaded, nightFlag ;
+    int xloc, yloc ;
 
     unsigned short uMax, uMin ;
 signals:
