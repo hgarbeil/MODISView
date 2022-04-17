@@ -47,6 +47,8 @@ void MainWindow::on_actionOpen_triggered()
     //ui->image_widget->loadQImage (mod11_hdf->stack, ns, nl) ;
     ui->image_widget->loadQImage_alt (mod11_hdf->daydata, ns, nl) ;
     ui->fnameLabel->setText (mod11_hdf->curfile.c_str()) ;
+    ui->month_CB->setCurrentIndex(mod11_hdf->month) ;
+    ui->yearLE->setText (QString::number(mod11_hdf->year)) ;
     } else {
         this->infile = QFileDialog::getOpenFileName (this, "Open HDF4 File", *m13dir) ;
         QFile *qf = new QFile (this->infile) ;
@@ -61,7 +63,9 @@ void MainWindow::on_actionOpen_triggered()
         ui->image_widget->loadQImage (mod13_hdf->ndvidata, ns, nl) ;
         //ui->image_widget->loadQImage (mod11_hdf->stack, ns, nl) ;
         //ui->image_widget->loadQImage_alt (mod11_hdf->daydata, ns, nl) ;
-
+        ui->fnameLabel->setText (mod13_hdf->curfile.c_str()) ;
+        ui->month_CB->setCurrentIndex(mod13_hdf->month) ;
+        ui->yearLE->setText (QString::number(mod13_hdf->year)) ;
 
     }
     ui->image_widget->update() ;

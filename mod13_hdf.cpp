@@ -153,6 +153,6 @@ void MOD13_hdf::getYearMonth (string fname){
     month = (stoi (daystring)+5) / 30 ;
     qDebug() << "file date : " << year << "  " << month ;
 
-    pos = fname.find ("MOD11C3.") ;
+    pos = fname.find ("MOD13C") ;
     curfile = fname.substr (pos) ;
 }

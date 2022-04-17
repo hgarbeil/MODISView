@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -188,33 +188,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QComboBox" name="year_CB">
-       <item>
-        <property name="text">
-         <string>2022</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>2021</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>2020</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>2019</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>2018</string>
-        </property>
-       </item>
-      </widget>
+      <widget class="QLineEdit" name="yearLE"/>
      </item>
     </layout>
    </widget>
