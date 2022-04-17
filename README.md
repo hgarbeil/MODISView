@@ -24,4 +24,5 @@ The program is designed to read in global NDVI (MOD13 and MOD11) datasets. These
 
 
 ### Current Status
-This program is under construction. Documentation is lagging behind the program status. Documentation for data directory format and an example dataset will be constructed and added. Also would like to add some screenshots. Basic capabilities for data access and visualization are in a skeleton framework at this point. Better data visualization and analysis are required.
+This program is under construction. Documentation is lagging behind the program status. Documentation for data directory format and an example dataset will be constructed and added. Also would like to add some screenshots. Basic capabilities for data access and visualization are in a skeleton framework at this point. Better data visualization and analysis are required. Although python programs exist to build the file stack these have not been placed in the repository. This will be forthcoming.
+
