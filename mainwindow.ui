@@ -260,17 +260,33 @@
      </property>
     </widget>
    </widget>
-   <widget class="QLabel" name="fileLabel">
+   <widget class="QLabel" name="flabel">
     <property name="geometry">
      <rect>
-      <x>260</x>
-      <y>26</y>
-      <width>341</width>
+      <x>230</x>
+      <y>20</y>
+      <width>91</width>
       <height>20</height>
      </rect>
     </property>
     <property name="text">
      <string>Current File : </string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="fnameLabel">
+    <property name="geometry">
+     <rect>
+      <x>340</x>
+      <y>20</y>
+      <width>311</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::Box</enum>
+    </property>
+    <property name="text">
+     <string/>
     </property>
    </widget>
   </widget>

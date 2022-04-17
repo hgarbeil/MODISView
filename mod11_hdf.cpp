@@ -146,6 +146,7 @@ int MOD11_hdf::getStack (char *infile) {
         daystackf[i] = stack[i] * 0.02f ;
     }
 
+    this->getYearMonth(filename);
     qDebug() << "this temp is " << stackf[long(ns * nl * 20)+350 * ns + 660] ;
     delete [] stack ;
     return (nyears) ;
@@ -161,4 +162,8 @@ void MOD11_hdf::getYearMonth (string fname){
 
     month = (stoi (daystring)+5) / 30 ;
     qDebug() << "file date : " << year << "  " << month ;
+
+    pos = fname.find ("MOD11C3.") ;
+    curfile = fname.substr (pos) ;
+    qDebug() << "curfile is " << curfile.c_str() ;
 }

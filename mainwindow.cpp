@@ -46,6 +46,7 @@ void MainWindow::on_actionOpen_triggered()
     ui->image_widget->loadQImage (mod11_hdf->nightdata, ns, nl) ;
     //ui->image_widget->loadQImage (mod11_hdf->stack, ns, nl) ;
     ui->image_widget->loadQImage_alt (mod11_hdf->daydata, ns, nl) ;
+    ui->fnameLabel->setText (mod11_hdf->curfile.c_str()) ;
     } else {
         this->infile = QFileDialog::getOpenFileName (this, "Open HDF4 File", *m13dir) ;
         QFile *qf = new QFile (this->infile) ;
@@ -64,6 +65,7 @@ void MainWindow::on_actionOpen_triggered()
 
     }
     ui->image_widget->update() ;
+
     this->getProfile (ns/2, nl/2) ;
 }
 

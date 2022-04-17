@@ -14,6 +14,7 @@ public:
     void openHDF (char *infile);
     void getYearMonth (string fname) ;
     int getStack (char *infile) ;
+    string curfile ;
     uint16 *nightdata, *daydata ;
     float *stackf, *daystackf, startlat, startlon, pixspace ;
     int starts, startl, ns, nl, year, month ;
