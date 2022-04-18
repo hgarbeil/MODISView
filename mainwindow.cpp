@@ -2,6 +2,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -14,10 +15,19 @@ MainWindow::MainWindow(QWidget *parent) :
     nyears = 20 ;
     xloc = ns / 2 ;
     yloc = nl / 2 ;
+
     LSTFlag = true ;
     m11dir = new QString ("/Users/hg1/data/MOD11") ;
     m13dir = new QString ("/Users/hg1/data/MOD13") ;
     ui->image_widget->setXY (xloc, yloc) ;
+    gc = new GlobalCoords () ;
+    gc->xy2latlon(xloc, yloc, &curlon, &curlat) ;
+
+    QString s = QString::number(curlon, 'f', 3) ;
+    ui->lonLE->setText (s) ;
+    s = QString::number(curlat, 'f', 3) ;
+    ui->latLE->setText (s) ;
+
     connect (ui->image_widget, SIGNAL(clickedXY(int *)), this, SLOT(newXY (int *))) ;
 }
 
@@ -115,6 +125,13 @@ void MainWindow::newXY (int *xy){
     int x, y ;
     x = xy[0];
     y = xy[1];
+    gc->xy2latlon(x, y, &curlon, &curlat) ;
+    QString s = QString::number(curlon, 'f', 3) ;
+    ui->lonLE->setText (s) ;
+    s = QString::number(curlat, 'f', 3) ;
+    ui->latLE->setText (s) ;
+
+
     this->getProfile(x,y);
 }
 

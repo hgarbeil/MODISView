@@ -8,6 +8,7 @@
 #include "mfhdf.h"
 #include "mod11_hdf.h"
 #include "mod13_hdf.h"
+#include "globalcoords.h"
 
 namespace Ui {
 class MainWindow;
@@ -23,8 +24,10 @@ public:
     QString *m11dir, *m13dir ;
     MOD11_hdf *mod11_hdf ;
     MOD13_hdf *mod13_hdf ;
+    GlobalCoords *gc ;
     ~MainWindow();
     int ns, nl, xloc, yloc, nyears ;
+    float curlat, curlon ;
     bool LSTFlag ;
 
 private slots:

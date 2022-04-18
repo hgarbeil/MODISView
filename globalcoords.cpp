@@ -5,7 +5,7 @@ GlobalCoords::GlobalCoords()
 
         startl = 700 ;
         starts = 1080 ;
-
+        degPerPixel = 0.05 ;
 
 
 }
