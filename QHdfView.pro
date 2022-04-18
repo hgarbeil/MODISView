@@ -32,7 +32,8 @@ SOURCES += \
     qcustomplot.cpp \
     myprofileplot.cpp \
     plotscaledialog.cpp \
-    mod13_hdf.cpp
+    mod13_hdf.cpp \
+    globalcoords.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -41,7 +42,8 @@ HEADERS += \
     qcustomplot.h \
     myprofileplot.h \
     plotscaledialog.h \
-    mod13_hdf.h
+    mod13_hdf.h \
+    globalcoords.h
 
 FORMS += \
         mainwindow.ui \
