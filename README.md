@@ -1,5 +1,7 @@
 # MODISView 
 
+# NOTE That this software development has been shifted to a Python Qt Environment. See the repository at https://github.com/hgarbeil/PyMODISView.git.
+
 MODIS MOD11 and MOD13 Global MODIS Monthly Global Analysis Software
 
 ## Description
